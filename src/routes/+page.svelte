@@ -8,7 +8,6 @@
 	import PlaceCard from '$/components/PlaceCard.svelte';
 	import { filter } from '$/hooks/filter';
 	import Navbar from '$/components/Navbar.svelte';
-	import { user } from '$/hooks/auth';
 
 	let loading = true;
 	let error = false;
@@ -95,7 +94,7 @@
 <div
 	class="{loading || error || !places || places.length === 0
 		? 'w-screen h-screen'
-		: ''} grid place-items-center p-8 md:p-12 lg:p-16"
+		: ''} grid place-items-center p-2 md:p-12 lg:p-16"
 >
 	{#if (loading || !places) && !error}
 		<div

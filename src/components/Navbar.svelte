@@ -3,17 +3,16 @@
 	import Filter from './Filter.svelte';
 </script>
 
-<div class="navbar bg-transparent p-12 md:p-16 lg:px-20 pt-10 absolute top-0">
+<div class="navbar bg-transparent p-4 md:p-8 lg:px-16 pt-10 absolute top-0">
 	<div class="navbar-start">
 		<div class="dropdown">
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<label tabindex="-1" class="btn btn-ghost lg:hidden">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-5 w-5"
+					class="h-5 w-5 stroke-current"
 					fill="none"
 					viewBox="0 0 24 24"
-					stroke="currentColor"
 				>
 					<path
 						stroke-linecap="round"
@@ -31,7 +30,7 @@
 			</ul>
 		</div>
 
-		<a class="btn btn-ghost normal-case text-xl" href="/">
+		<a class="btn btn-ghost normal-case text-xl hidden md:block" href="/">
 			<svg
 				class="mr-3 w-10 h-8 fill-primary"
 				xmlns="http://www.w3.org/2000/svg"
