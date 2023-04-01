@@ -107,7 +107,7 @@
 	{:else if places?.length === 0}
 		<p>No places found.</p>
 	{:else if places}
-		<div class="grid gap-8 grid-cols-1 md:grid-cols-2">
+		<div class="grid gap-8 grid-cols-1 md:grid-cols-2 mt-24">
 			{#each places as place}
 				<a
 					href="/place/{place.id}"
