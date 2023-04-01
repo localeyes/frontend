@@ -12,6 +12,11 @@ declare global {
 	}
 }
 
+export type Question = {
+	question: string;
+	answers: string[];
+}
+
 export type Place = {
 	id: string;
 	name: string;

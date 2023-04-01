@@ -5,6 +5,7 @@
 	import { calculateDistance, formatDistance } from '$/util/geo';
 	import type { PageData } from './$types';
 	import { browser } from '$app/environment';
+	import type { Question } from '$/app';
 
 	// This is a hack to get around the fact that the Marker's typing is wrong
 	const youColor = 'red' as unknown as number;
@@ -15,6 +16,29 @@
 	let coords: [number, number];
 	let distance: number | null;
 	let claimedPoints = false;
+	let manualClose = false;
+	let deniedLocation = false;
+	let showQuestionModal = false;
+	let questions: Promise<{
+		id: string;
+		questions: Question[];
+	}>;
+	let answers: number[] = [];
+	let correctAnswers: number[];
+	let answersLoading = false;
+
+	$: {
+		showQuestionModal =
+			distance !== null && distance < 1_000 && !claimedPoints && !manualClose;
+
+		if (showQuestionModal && !questions) {
+			questions = fetch(
+				`https://api.localey.es/place/${data.props.place.id}/questions`
+			)
+				.then(res => res.json())
+				.then(res => res.data);
+		}
+	}
 
 	$: {
 		distance =
@@ -32,7 +56,117 @@
 	const useDark = browser && matchMedia('(prefers-color-scheme: dark)').matches;
 </script>
 
-<Geolocation getPosition bind:coords />
+<Geolocation getPosition bind:coords on:error={() => (deniedLocation = true)} />
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal-3" class="modal-toggle" />
+<div class="modal" class:modal-open={showQuestionModal}>
+	<div class="modal-box relative">
+		<label
+			for="my-modal-3"
+			class="btn btn-sm btn-circle absolute right-2 top-2"
+			on:click={() => {
+				manualClose = true;
+				showQuestionModal = false;
+			}}
+			on:keydown
+		>
+			✕
+		</label>
+
+		<h3 class="text-lg font-bold">You're getting close!</h3>
+		<p class="py-4">
+			Since you're almost there, we've prepared a few multiple-choice questions
+			for you about <span class="font-bold">{data.props.place.name}</span>.
+		</p>
+
+		{#if questions}
+			{#await questions}
+				<div class="grid w-full place-items-center h-48">
+					<div
+						class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+						role="status"
+					/>
+				</div>
+			{:then questions}
+				{#if questions.questions.length}
+					<form>
+						<div class="flex flex-col gap-6">
+							{#each questions.questions as question, i}
+								<h2 class="text-md font-bold">{i + 1}. {question.question}</h2>
+								<div class="flex flex-col gap-4">
+									{#each { length: 4 } as _, j}
+										<label class="flex flex-row gap-2 cursor-pointer">
+											<input
+												type="radio"
+												name={correctAnswers === undefined
+													? `radio-${i}`
+													: `radio-${i}-${j}`}
+												class="radio {correctAnswers === undefined
+													? 'checked:bg-primary'
+													: correctAnswers[i] === j
+													? 'checked:bg-success'
+													: 'checked:bg-error'}"
+												disabled={correctAnswers !== undefined &&
+													answers[i] !== j}
+												checked={answers[i] === j ||
+													(correctAnswers !== undefined &&
+														correctAnswers[i] === j)}
+												on:click={() => (answers[i] = j)}
+											/>
+											<span class="label-text">{question.answers[j]}</span>
+										</label>
+									{/each}
+								</div>
+							{/each}
+						</div>
+
+						{#if answers.length === questions.questions.length && correctAnswers === undefined}
+							<div class="modal-action">
+								<button
+									class="btn btn-success"
+									class:loading={answersLoading}
+									on:click|preventDefault={async () => {
+										answersLoading = true;
+
+										const response = await fetch(
+											`https://api.localey.es/place/${data.props.place.id}/questions/${questions.id}`,
+											{
+												method: 'POST',
+												body: JSON.stringify(answers),
+												headers: {
+													'Content-Type': 'application/json',
+												},
+											}
+										);
+
+										const json = await response.json();
+
+										answersLoading = false;
+										correctAnswers = json.data;
+									}}
+								>
+									Submit
+								</button>
+							</div>
+						{/if}
+					</form>
+				{:else}
+					<div class="grid w-full place-items-center h-48">
+						<p>Could not generate questions.</p>
+					</div>
+				{/if}
+			{/await}
+		{:else}
+			<div class="grid w-full place-items-center h-48">
+				<div
+					class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+					role="status"
+				/>
+			</div>
+		{/if}
+	</div>
+</div>
 
 <div
 	class="hero min-h-screen min-w-screen place-items-start relative"
@@ -71,6 +205,11 @@
 						>
 							{formatDistance(distance)}
 						</p>
+					{:else if !deniedLocation}
+						<div
+							class="text-primary inline-block h-20 w-20 animate-spin rounded-full border-8 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+							role="status"
+						/>
 					{:else}
 						<p class="text-8xl font-bold -mt-3 text-primary">Unknown</p>
 					{/if}
