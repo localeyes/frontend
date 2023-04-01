@@ -238,7 +238,7 @@
 				</span>
 			</div>
 
-			<div class="sticky bottom-8 flex flex-col">
+			<div class="sticky bottom-0 p-8 flex flex-col">
 				<a
 					class="btn btn-ghost w-16 h-16 p-0 rounded-full place-self-center"
 					href="#map"
