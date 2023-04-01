@@ -42,7 +42,7 @@
 		  </div>
 		  <div class="stat-title">Rating (out of 5)</div>
 		  <div class="stat-value text-primary">{place.rating}</div>
-		  <div class="stat-desc">{Math.floor(Math.random() * 5)}% higher than last month</div>
+		  <div class="stat-desc">{Math.floor(Math.random() * 5) + 1}% higher than last month</div>
 		</div>
 		
 		<div class="stat">
@@ -51,7 +51,7 @@
 		  </div>
 		  <div class="stat-title">Total Ratings</div>
 		  <div class="stat-value text-secondary">{place.ratings}</div>
-		  <div class="stat-desc">{Math.floor(Math.random() * 10)}% more than last month</div>
+		  <div class="stat-desc">{Math.floor(Math.random() * 10) + 1}% more than last month</div>
 		</div>
 		
 		<div class="stat">
