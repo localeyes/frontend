@@ -185,7 +185,7 @@
 				class="w-full h-full px-8 pt-8 md:px-12 md:pt-12 lg:px-16 lg:pt-16 flex lg:flex-row flex-col gap-16 lg:gap-8"
 			>
 				<div
-					class="place-self-center lg:place-self-start flex flex-col gap-8 max-w-prose-xl z-50"
+					class="place-self-center lg:place-self-start flex flex-col gap-8 max-w-prose-xl"
 				>
 					<span class="place-self-start">
 						<h1 class="text-5xl font-bold text-primary">
@@ -225,7 +225,7 @@
 						<p class="text-3xl">from your location</p>
 					</span>
 
-					<span class="lg:place-self-end text-right z-50">
+					<span class="lg:place-self-end text-right">
 						<p class="text-3xl">
 							with {formatter.format(data.props.place.ratings)} rating{data
 								.props.place.ratings === 1
@@ -238,7 +238,7 @@
 				</span>
 			</div>
 
-			<div class="sticky bottom-8 flex flex-col z-10">
+			<div class="sticky bottom-8 flex flex-col">
 				<a
 					class="btn btn-ghost w-16 h-16 p-0 rounded-full place-self-center"
 					href="#map"
