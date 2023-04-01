@@ -25,9 +25,11 @@
 	{#if place.types.length}
 		<div class="flex flex-row flex-wrap gap-2 px-8 pt-4">
 			{#each place.types as type}
-				<p class="badge badge-lg text-lg">
-					{TYPE_TO_PRETTY.get(type)}
-				</p>
+				{#if TYPE_TO_PRETTY.has(type)}
+					<p class="badge badge-lg text-lg">
+						{TYPE_TO_PRETTY.get(type)}
+					</p>
+				{/if}
 			{/each}
 		</div>
 	{/if}
