@@ -7,6 +7,7 @@
 	import { browser } from '$app/environment';
 	import type { Question } from '$/app';
 	import { user } from '$/hooks/auth';
+	import Rating from '$/components/Rating.svelte';
 
 	// This is a hack to get around the fact that the Marker's typing is wrong
 	const youColor = 'red' as unknown as number;
@@ -232,87 +233,7 @@
 								: 's'}
 						</p>
 
-						<div class="rating rating-lg rating-half float-right">
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-1"
-								disabled
-								checked={data.props.place.rating > 0 &&
-									data.props.place.rating < 0.75}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-2"
-								disabled
-								checked={data.props.place.rating >= 0.75 &&
-									data.props.place.rating < 1.25}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-1"
-								disabled
-								checked={data.props.place.rating >= 1.25 &&
-									data.props.place.rating < 1.75}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-2"
-								disabled
-								checked={data.props.place.rating >= 1.75 &&
-									data.props.place.rating < 2.25}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-1"
-								disabled
-								checked={data.props.place.rating >= 2.25 &&
-									data.props.place.rating < 2.75}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-2"
-								disabled
-								checked={data.props.place.rating >= 2.75 &&
-									data.props.place.rating < 3.25}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-1"
-								disabled
-								checked={data.props.place.rating >= 3.25 &&
-									data.props.place.rating < 3.75}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-2"
-								disabled
-								checked={data.props.place.rating >= 3.75 &&
-									data.props.place.rating < 4.25}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-1"
-								disabled
-								checked={data.props.place.rating >= 4.25 &&
-									data.props.place.rating < 4.75}
-							/>
-							<input
-								type="radio"
-								name="rating-10"
-								class="bg-yellow-400 mask mask-star-2 mask-half-2"
-								disabled
-								checked={data.props.place.rating >= 4.75}
-							/>
-						</div>
+						<Rating rating={data.props.place.rating} />
 					</span>
 				</span>
 			</div>
