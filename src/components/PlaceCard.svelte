@@ -2,10 +2,9 @@
 	import type { PlaceWithDistance } from '$/app';
 	import { formatDistance } from '$/util/geo';
 	import { TYPE_TO_PRETTY } from '$/util/type';
+	import PlaceStats from './PlaceStats.svelte';
 
 	export let place: PlaceWithDistance;
-
-	console.log(place.image);
 </script>
 
 <div class="card bg-base-100 shadow-lg hover:shadow-2xl w-full h-full">
@@ -75,6 +74,9 @@
 		<p class="truncate whitespace-pre-line line-clamp-6 text-lg">
 			{place.about}
 		</p>
+
+		<PlaceStats {place} />
+
 		<div class="card-actions justify-end grid" />
 	</div>
 </div>

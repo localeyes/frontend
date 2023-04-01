@@ -30,7 +30,7 @@
 			</ul>
 		</div>
 
-		<a class="btn btn-ghost normal-case text-xl hidden md:block" href="/">
+		<a class="btn btn-ghost normal-case text-xl hidden md:flex" href="/">
 			<svg
 				class="mr-3 w-10 h-8 fill-primary"
 				xmlns="http://www.w3.org/2000/svg"
