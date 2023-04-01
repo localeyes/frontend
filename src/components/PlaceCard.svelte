@@ -4,11 +4,13 @@
 	import { TYPE_TO_PRETTY } from '$/util/type';
 
 	export let place: PlaceWithDistance;
+
+	console.log(place.image);
 </script>
 
-<div class="card bg-base-100 shadow-lg hover:shadow-2xl">
+<div class="card bg-base-100 shadow-lg hover:shadow-2xl w-full h-full">
 	<figure
-		class="relative h-64 lg:h-96 bg-cover"
+		class="relative h-64 lg:h-96 w-full bg-cover"
 		style="background-image: url({place.image})"
 	>
 		<div class="absolute top-0 left-0 w-full h-full">

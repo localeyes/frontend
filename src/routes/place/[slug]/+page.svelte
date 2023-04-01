@@ -6,6 +6,7 @@
 	import type { PageData } from './$types';
 	import { browser } from '$app/environment';
 	import type { Question } from '$/app';
+	import { user } from '$/hooks/auth';
 
 	// This is a hack to get around the fact that the Marker's typing is wrong
 	const youColor = 'red' as unknown as number;
@@ -121,7 +122,7 @@
 							{/each}
 						</div>
 
-						{#if answers.length === questions.questions.length && correctAnswers === undefined}
+						{#if answers.length === questions.questions.length && answers.length > 0 && correctAnswers === undefined}
 							<div class="modal-action">
 								<button
 									class="btn btn-success"
@@ -134,9 +135,14 @@
 											{
 												method: 'POST',
 												body: JSON.stringify(answers),
-												headers: {
-													'Content-Type': 'application/json',
-												},
+												headers: $user
+													? {
+															'Content-Type': 'application/json',
+															Authorization: $user,
+													  }
+													: {
+															'Content-Type': 'application/json',
+													  },
 											}
 										);
 
@@ -334,7 +340,7 @@
 
 <div id="map" class="w-screen h-screen relative grid">
 	<a
-		class="btn btn-ghost absolute top-8 place-self-center w-16 h-16 p-0 rounded-full hover:-mb-1 transition-all duration-300 z-10"
+		class="btn absolute top-8 place-self-center w-16 h-16 p-0 rounded-full hover:-mb-1 transition-all duration-300 z-10"
 		href="#top"
 	>
 		<svg
