@@ -87,7 +87,7 @@
 			{#each places as place}
 				<a
 					href="/place/{place.id}"
-					class="btn btn-ghost w-full h-full text-left font-normal hover:bg-transparent"
+					class="btn btn-ghost p-0 w-full h-full text-left font-normal hover:bg-transparent"
 				>
 					<PlaceCard {place} />
 				</a>
