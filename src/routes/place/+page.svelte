@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Geolocation from 'svelte-geolocation';
 	import InfiniteScroll from 'svelte-infinite-scroll';
+	import { onMount } from 'svelte';
 
 	import type { PlaceWithDistance } from '$/app';
 	import { calculateDistance } from '$/util/geo';
-	import { browser } from '$app/environment';
 	import PlaceCard from '$/components/PlaceCard.svelte';
 
 	let loading = true;
@@ -27,7 +27,7 @@
 		}
 	}
 
-	if (browser) {
+	onMount(() => {
 		navigator.geolocation.getCurrentPosition(
 			async position => {
 				coords = [position.coords.longitude, position.coords.latitude];
@@ -42,7 +42,7 @@
 				loading = false;
 			}
 		);
-	}
+	});
 
 	async function fetchPlaces() {
 		const response = await fetch(
