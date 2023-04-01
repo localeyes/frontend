@@ -28,7 +28,7 @@
 			<Rating rating={place.rating} color="bg-primary" id={place.id} />
 		</div>
 		<div class="stat-desc">
-			{Math.floor(Math.random() * 5) + 1}% higher than last month
+			{Math.floor(Math.random() * 7) + 1}% higher than last month
 		</div>
 	</div>
 
@@ -53,7 +53,7 @@
 			{formatter.format(place.ratings)}
 		</div>
 		<div class="stat-desc">
-			{Math.floor(Math.random() * 10) + 1}% more than last month
+			{Math.floor(Math.random() * 7) + 1}% more than last month
 		</div>
 	</div>
 
@@ -68,7 +68,7 @@
 			{Math.floor(Math.random() * 4) * 5 + 5}% off
 		</div>
 		<div class="stat-desc">
-			{Math.floor(Math.random() * 100) + 1} coupons remaining
+			{Math.floor(Math.random() * 50) + 1} coupons remaining
 		</div>
 	</div>
 </div>
