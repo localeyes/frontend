@@ -3,7 +3,7 @@
 	import Filter from './Filter.svelte';
 </script>
 
-<div class="navbar bg-transparent px-20 pt-10 absolute top-0">
+<div class="navbar bg-transparent p-12 md:p-16 lg:px-20 pt-10 absolute top-0">
 	<div class="navbar-start">
 		<div class="dropdown">
 			<!-- svelte-ignore a11y-label-has-associated-control -->

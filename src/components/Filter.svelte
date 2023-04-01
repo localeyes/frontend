@@ -42,6 +42,18 @@
 		class="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
 	>
 		<div class="grid grid-cols-1 gap-3 p-3" tabindex="-1">
+			<label class="label cursor-pointer">
+				<span class="label-text">Wheelchair accessible</span>
+				<input
+					type="checkbox"
+					checked={$filter.has('wheelchair')}
+					class="checkbox checkbox-success"
+					on:change={() => toggle('wheelchair')}
+				/>
+			</label>
+
+			<hr class="h-px border bg-neutral-content border-0" />
+
 			{#each types as { id, name }}
 				<label class="label cursor-pointer">
 					<span class="label-text">{name}</span>
