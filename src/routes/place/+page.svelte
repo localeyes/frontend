@@ -46,7 +46,7 @@
 
 	async function fetchPlaces() {
 		const response = await fetch(
-			`https://geo.hackthefeed.com/place/search?lat=${coords[1]}&lng=${
+			`https://api.localey.es/place/search?lat=${coords[1]}&lng=${
 				coords[0]
 			}&skip=${page++ * limit}&limit=${limit}`
 		);

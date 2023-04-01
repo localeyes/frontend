@@ -25,7 +25,7 @@
 		if (distance !== null && distance < 100 && !claimedPoints) {
 			claimedPoints = true;
 
-			fetch(`/api/claim/${data.props.place.id}`, { method: 'POST' });
+			fetch(`https://api.localey.es/place/${data.props.place.id}/claim`);
 		}
 	}
 
